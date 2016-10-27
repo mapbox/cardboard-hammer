@@ -6,7 +6,7 @@ Write Hammer:
 
 ```
 Usage:
-  $ ./hammer.js feature.geojson
+  $ ./bin/write-hammer.js feature.geojson
 
 Options:
   -t, --time        Amount of time to hammer (e.g. 5s, 10m, 1h)
