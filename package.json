@@ -10,5 +10,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "meow": "^3.7.0"
+  },
+  "dependencies": {
+    "cardboard": "^2.2.0",
+    "d3-queue": "^3.0.3"
+  }
 }

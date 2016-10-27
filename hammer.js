@@ -29,7 +29,7 @@
 // - write hammer and list hammer
 
 var meow = require('meow');
-var Cardboard = require('../');
+var Cardboard = require('cardboard');
 var queue = require('d3-queue').queue;
 var fs = require('fs');
 
