@@ -3,14 +3,14 @@
 var tape = require('tape');
 var writeHammer = require('../lib/write-hammer');
 
-tape('config must be called before writeHammer', (assert) => {
+tape('writeHammer: config must be called beforehand', (assert) => {
   writeHammer({ type: 'Feature', properties: {}, geometry: {} }, 'id', (err) => {
     assert.equals(err.message, 'writeHammer.config must be called first');
     assert.end();
   });
 });
 
-tape('writeHammer calls cardboard.put once and reports latency', (assert) => {
+tape('writeHammer: calls cardboard.put once and reports latency', (assert) => {
   const fakeCardboard = {
     put: (geojson, dataset, cb) => {
       assert.deepEquals(geojson, { type: 'Feature', properties: {}, geometry: {} });
@@ -29,7 +29,7 @@ tape('writeHammer calls cardboard.put once and reports latency', (assert) => {
   });
 });
 
-tape('writeHammer returns latency and throttle if throttled', (assert) => {
+tape('writeHammer: returns latency and throttle if throttled', (assert) => {
   const fakeCardboard = {
     put: (geojson, dataset, cb) => {
       const err = new Error('throttle!');
@@ -48,7 +48,7 @@ tape('writeHammer returns latency and throttle if throttled', (assert) => {
   });
 });
 
-tape('writeHammer returns error if there is a non-throttle error', (assert) => {
+tape('writeHammer: returns error if there is a non-throttle error', (assert) => {
   const fakeCardboard = {
     put: (geojson, dataset, cb) => {
       const err = new Error('Wowza!');
