@@ -43,6 +43,7 @@ runHammer(writeHammer.bind(this, {type:'Feature',geojson:{...}}, 'dataset'), {},
     console.log(`Max Latency: ${output.max_latency}`);
     console.log(`Throttles: ${output.sum_throttles}`);
 });
+```
 
 #### writeHammer(geojson, datasetId, callback);
 
@@ -56,3 +57,4 @@ writeHammer({type:'Feature', geojson:{...}}, 'dataset', function(err, metrics) {
   console.log(`Latency: ${metrics.latency}`);
   console.log(`Throttles: ${metrics.throttles}`);
 });
+```
