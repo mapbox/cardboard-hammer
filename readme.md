@@ -6,7 +6,18 @@ Write Hammer:
 
 ```
 Usage:
-  $ ./bin/write-hammer.js feature.geojson
+  $ ./bin/hammer write feature.geojson
+
+Options:
+  -t, --time        Amount of time to hammer (e.g. 5s, 10m, 1h)
+  -c, --concurrency Number of concurrent requests to send (default 10)
+```                
+
+Write-and-list Hammer:
+
+```
+Usage:
+  $ ./bin/hammer write-and-list feature.geojson
 
 Options:
   -t, --time        Amount of time to hammer (e.g. 5s, 10m, 1h)
@@ -53,6 +64,21 @@ runHammer(writeHammer.bind(this, {type:'Feature',geojson:{...}}, 'dataset'), {},
 
 ```
 writeHammer({type:'Feature', geojson:{...}}, 'dataset', function(err, metrics) {
+  if (err) throw err;
+  console.log(`Latency: ${metrics.latency}`);
+  console.log(`Throttles: ${metrics.throttles}`);
+});
+```
+
+
+#### writeAndListHammer(geojson, datasetId, callback);
+
+- `geojson` - a single geojson feature who's ID will get written once and then polled until showing up in the listing index.
+- `datasetId` - the id of the dataset
+- `callback` - gets a return of the error, or returns an object with latency of the average list request, a count of the number of tries to get a successful list, and a count of the number of read throttles it encountered
+
+```
+writeAndListHammer({type:'Feature', geojson:{...}}, 'dataset', function(err, metrics) {
   if (err) throw err;
   console.log(`Latency: ${metrics.latency}`);
   console.log(`Throttles: ${metrics.throttles}`);
