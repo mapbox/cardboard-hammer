@@ -34,15 +34,12 @@ if (require.main === module) {
   var datasetID = 'writehammer-' + Date.now();
 
   if (!process.env.CardboardRegion) throw new Error('You must provide a region');
-  if (!process.env.CardboardTable) throw new Error('You must provide a table name');
-  if (!process.env.CardboardBucket) throw new Error('You must provide a S3 bucket');
-  if (!process.env.CardboardPrefix) throw new Error('You must provide a S3 prefix');
+  if (!process.env.CardboardFeaturesTable) throw new Error('You must provide a features table name');
+  if (!process.env.CardboardListTable) throw new Error('You must provide a list table name');
 
   writeHammer.config({
     region: process.env.CardboardRegion,
-    table: process.env.CardboardTable,
-    bucket: process.env.CardboardBucket,
-    prefix: process.env.CardboardPrefix
+    mainTable: process.env.CardboardFeaturesTable
   });
 
   runHammer(writeHammer.bind(this, geojson, datasetID), cli.flags, function(err, output) {

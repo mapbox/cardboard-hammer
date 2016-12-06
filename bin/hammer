@@ -33,11 +33,6 @@ if (require.main === module) {
   var geojson = JSON.parse(buffer.toString());
   if (geojson.id) delete geojson.id;
 
-  if (!process.env.CardboardRegion) throw new Error('You must provide a region');
-  if (!process.env.CardboardTable) throw new Error('You must provide a table name');
-  if (!process.env.CardboardBucket) throw new Error('You must provide a S3 bucket');
-  if (!process.env.CardboardPrefix) throw new Error('You must provide a S3 prefix');
-
   let hammerFunc;
   let datasetID;
   let logFunc;
@@ -58,12 +53,11 @@ if (require.main === module) {
       break;
   }
 
-  hammerFunc.config(Cardboard({
+  hammerFunc.config({
     region: process.env.CardboardRegion,
-    table: process.env.CardboardTable,
-    bucket: process.env.CardboardBucket,
-    prefix: process.env.CardboardPrefix
-  }));
+    mainTable: process.env.CardboardFeaturesTable,
+    listTable: process.env.CardboardListTable
+  });
 
   const opts = {
     concurrency: cli.flags.concurrency && Number(cli.flags.concurrency),

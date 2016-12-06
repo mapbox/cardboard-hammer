@@ -20,7 +20,7 @@
     "tape": "^4.6.2"
   },
   "dependencies": {
-    "cardboard": "^2.2.0",
-    "d3-queue": "^3.0.3"
+    "cardboard-list": "https://github.com/mapbox/cardboard-list/tarball/6def0d01f8a87f685d1c0641e12fe9984cdfb3f0",
+    "cardboard": "https://github.com/mapbox/cardboard/tarball/6ad662d35286bfb725f15e271feee99718892cb"
   }
 }
