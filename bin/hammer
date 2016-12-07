@@ -86,6 +86,7 @@ function writeLog(err, output) {
   console.log(`Avg Latency: ${output.avg_latency}`);
   console.log(`Max Latency: ${output.max_latency}`);
   console.log(`Throttles: ${output.sum_throttles}`);
+  process.exit(0);
 }
 
 function writeAndListLog(err, output) {
@@ -102,4 +103,5 @@ function writeAndListLog(err, output) {
   console.log(`Avg Time To List: ${output.avg_time_to_list}`);
   console.log(`Max Time To List: ${output.max_time_to_list}`);
   console.log(`Read Throttles: ${output.sum_read_throttles}`);
+  process.exit(0);
 }
