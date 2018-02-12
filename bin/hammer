@@ -33,11 +33,6 @@ if (require.main === module) {
   var geojson = JSON.parse(buffer.toString());
   if (geojson.id) delete geojson.id;
 
-  if (!process.env.CardboardRegion) throw new Error('You must provide a region');
-  if (!process.env.CardboardTable) throw new Error('You must provide a table name');
-  if (!process.env.CardboardBucket) throw new Error('You must provide a S3 bucket');
-  if (!process.env.CardboardPrefix) throw new Error('You must provide a S3 prefix');
-
   let hammerFunc;
   let datasetID;
   let logFunc;
@@ -58,12 +53,11 @@ if (require.main === module) {
       break;
   }
 
-  hammerFunc.config(Cardboard({
+  hammerFunc.config({
     region: process.env.CardboardRegion,
-    table: process.env.CardboardTable,
-    bucket: process.env.CardboardBucket,
-    prefix: process.env.CardboardPrefix
-  }));
+    mainTable: process.env.CardboardFeaturesTable,
+    listTable: process.env.CardboardListTable
+  });
 
   const opts = {
     concurrency: cli.flags.concurrency && Number(cli.flags.concurrency),
@@ -92,6 +86,7 @@ function writeLog(err, output) {
   console.log(`Avg Latency: ${output.avg_latency}`);
   console.log(`Max Latency: ${output.max_latency}`);
   console.log(`Throttles: ${output.sum_throttles}`);
+  process.exit(0);
 }
 
 function writeAndListLog(err, output) {
@@ -108,4 +103,5 @@ function writeAndListLog(err, output) {
   console.log(`Avg Time To List: ${output.avg_time_to_list}`);
   console.log(`Max Time To List: ${output.max_time_to_list}`);
   console.log(`Read Throttles: ${output.sum_read_throttles}`);
+  process.exit(0);
 }
